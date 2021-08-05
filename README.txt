@@ -23,6 +23,9 @@ provide it with `-l` key)
     * To get form #123456 details (similarly, f123456.txt and f123456.json will be created).
         $ python get_pyrus_json.py -f 123456
 
+    * To use different credentials file use -l key:
+        $ python get_pyrus_json.py -f 123456 -l my_login.json
+
 Dependencies
 
 This script uses pyrus-api - an official Python library from Pyrus. To install it simply type:
