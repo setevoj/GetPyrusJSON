@@ -13,7 +13,8 @@ in the settings)
 
 Script usage:
 
-* Fill credentials.json file with your Pyrus API credentials
+* Fill credentials.json file with your Pyrus API credentials  (if you use different file name please
+provide it with `-l` key)
 * Run script from its directory
     * To get the task #1234567 details in files t1234567.txt and t1234567.json
         $ python get_pyrus_json.py -t 1234567

@@ -58,32 +58,37 @@ if __name__ == '__main__':
     parser.add_argument("-f", "--form", action="store", help="id of a form to download", type=int)
     parser.add_argument("-c", "--catalog", action="store", help="id of a catalog to download", type=int)
     parser.add_argument("-v", "--version", action="store", help="API version to use", type=int)
+    parser.add_argument("-l", "--login", action="store", help="file with API credentials", type=str)
 
     args = parser.parse_args()
-    pyrus_client = initialize()
 
     if not args.task and not args.form and not args.catalog:
         print('use -h to get help\nuse either -f or -t or -c to get output')
         exit()
-    elif args.task:
-        if args.version == 3:
-            print("Using v3!!")
-            url = f"https://pyrus.com/restapi/v3/task/{args.task}"
-        else:
-            url = pyrus_client._create_url(f'/tasks/{args.task}')
-        print(f'Pretty printing task {args.task}:\n==============================')
-        filename = f"t{args.task}"
-    elif args.form:
-        url = pyrus_client._create_url(f'/forms/{args.form}')
-        print(f'Pretty printing form {args.form}:\n==============================')
-        filename = f"f{args.form}"
     else:
-        url = pyrus_client._create_url(f'/catalogs/{args.catalog}')
-        print(f'Pretty printing catalog {args.catalog}:\n==============================')
-        filename = f"c{args.catalog}"
-    response = pyrus_client._perform_get_request(url)
-    pprint.pprint(response)
-    with open(filename + ".txt", "w", encoding="utf-8") as f:
-        pprint.pprint(response, f)
-    with open(filename + ".json", "w", encoding="utf-8") as f:
-        json.dump(response, f)
+        # Changing default file with credentials
+        if args.login:
+            CONFIG = args.login
+        pyrus_client = initialize()
+        if args.task:
+            if args.version == 3:
+                print("Using v3!!")
+                url = f"https://pyrus.com/restapi/v3/task/{args.task}"
+            else:
+                url = pyrus_client._create_url(f'/tasks/{args.task}')
+            print(f'Pretty printing task {args.task}:\n==============================')
+            filename = f"t{args.task}"
+        elif args.form:
+            url = pyrus_client._create_url(f'/forms/{args.form}')
+            print(f'Pretty printing form {args.form}:\n==============================')
+            filename = f"f{args.form}"
+        else:
+            url = pyrus_client._create_url(f'/catalogs/{args.catalog}')
+            print(f'Pretty printing catalog {args.catalog}:\n==============================')
+            filename = f"c{args.catalog}"
+        response = pyrus_client._perform_get_request(url)
+        pprint.pprint(response)
+        with open(filename + ".txt", "w", encoding="utf-8") as f:
+            pprint.pprint(response, f)
+        with open(filename + ".json", "w", encoding="utf-8") as f:
+            json.dump(response, f)

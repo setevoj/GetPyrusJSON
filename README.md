@@ -12,7 +12,8 @@ Author of this script uses JSON Formatter Chrome extension for that. (But rememb
 in the settings)
 
 ###Script usage:
-* Fill _**credentials.json**_ file with your Pyrus API credentials 
+* Fill _**credentials.json**_ file with your Pyrus API credentials (if you use different file name please
+provide it with `-l` key)
 * Run script from its directory
     * To get the task #1234567 details in files _**t1234567.txt**_ and _**t1234567.json**_
         ```console
