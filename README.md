@@ -31,6 +31,10 @@ provide it with `-l` key)
           ```console
           $ python get_pyrus_json.py -f 123456 -l my_login.json
           ```  
+      * To open downloaded .json file in browser use -o key:
+          ```console
+          $ python get_pyrus_json.py -f 123456 -l my_login.json -o
+          ```  
       
 
 ### Dependencies

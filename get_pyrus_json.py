@@ -24,6 +24,8 @@ import argparse
 import pprint
 import json
 import logging
+import webbrowser
+import os
 from pyrus import client
 
 CONFIG = 'credentials.json'
@@ -59,6 +61,7 @@ if __name__ == '__main__':
     parser.add_argument("-c", "--catalog", action="store", help="id of a catalog to download", type=int)
     parser.add_argument("-v", "--version", action="store", help="API version to use", type=int)
     parser.add_argument("-l", "--login", action="store", help="file with API credentials", type=str)
+    parser.add_argument("-o", "--open", action="store_true", help="open json in browser")
 
     args = parser.parse_args()
 
@@ -92,3 +95,6 @@ if __name__ == '__main__':
             pprint.pprint(response, f)
         with open(filename + ".json", "w", encoding="utf-8") as f:
             json.dump(response, f)
+        if args.open:
+            webbrowser.open(os.path.abspath(filename+".json"))
+
